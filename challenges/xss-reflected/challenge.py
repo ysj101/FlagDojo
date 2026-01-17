@@ -18,16 +18,16 @@ class XSSReflectedChallenge(BaseChallenge):
     difficulty = 'easy'
     points = 100
     description = '''
-    This search feature directly displays your search query in the results.
-    Can you inject JavaScript code and make it execute?
-    
-    **Objective**: Trigger an alert box with `alert(document.domain)`.
+    この検索機能は、検索クエリを結果に直接表示します。
+    JavaScriptコードを注入して実行させることができますか？
+
+    **目的**: `alert(document.domain)` でアラートボックスを表示させてください。
     '''
     flag = 'FLAG{r3fl3ct3d_xss_1s_d4ng3r0us}'
     hints = [
-        'Try searching for: <script>alert(1)</script>',
-        'The search term is reflected directly into the HTML without sanitization',
-        'Once you get the alert working, submit the flag shown in the challenge description'
+        '次を検索してみてください: <script>alert(1)</script>',
+        '検索語がサニタイズされずにHTMLに直接反映されています',
+        'アラートが動作したら、チャレンジ説明に表示されているフラグを提出してください'
     ]
     order = 1
 

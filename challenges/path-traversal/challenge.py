@@ -20,18 +20,18 @@ class PathTraversalChallenge(BaseChallenge):
     difficulty = 'easy'
     points = 100
     description = '''
-    A simple file viewer application that displays text files from a documents directory.
-    Users can select files from a dropdown menu to view their contents.
+    documentsディレクトリからテキストファイルを表示するシンプルなファイルビューアーアプリケーションです。
+    ドロップダウンメニューからファイルを選択して内容を表示できます。
 
-    **Objective**: Use path traversal to read the secret file outside the documents directory.
-    Find and read `/tmp/secret.txt` which contains the flag.
+    **目的**: パストラバーサルを使用して、documentsディレクトリ外の秘密ファイルを読み取ってください。
+    フラグが含まれている `/tmp/secret.txt` を見つけて読み取ってください。
     '''
     flag = 'FLAG{p4th_tr4v3rs4l_1s_d4ng3r0us}'
     hints = [
-        'The filename parameter is not properly validated',
-        'Try using ../ to traverse up directories',
-        'The secret file is located at: ../../../../../../tmp/secret.txt',
-        'URL encode the payload if needed: %2e%2e%2f for ../'
+        'filenameパラメータが適切に検証されていません',
+        '../ を使用してディレクトリを上に移動してみてください',
+        '秘密ファイルの場所: ../../../../../../tmp/secret.txt',
+        '必要に応じてURLエンコードしてください: ../ は %2e%2e%2f'
     ]
     order = 5
 

@@ -20,18 +20,18 @@ class CSRFChallenge(BaseChallenge):
     difficulty = 'medium'
     points = 200
     description = '''
-    A simple banking application where you can transfer money between accounts.
-    The application is missing proper CSRF protection.
+    アカウント間で送金ができるシンプルな銀行アプリケーションです。
+    このアプリケーションには適切なCSRF保護がありません。
 
-    **Objective**: Craft a CSRF attack that transfers money from the victim's account.
-    You'll need to create an external HTML page that automatically submits a transfer.
+    **目的**: 被害者のアカウントから送金を行うCSRF攻撃を作成してください。
+    自動的に送金を実行する外部HTMLページを作成する必要があります。
     '''
     flag = 'FLAG{csrf_t0k3ns_4r3_1mp0rt4nt}'
     hints = [
-        'The transfer form has no CSRF token protection',
-        'You can create an HTML page with a hidden form that auto-submits',
-        'Try using <form> with method="POST" and JavaScript to auto-submit',
-        'Once you understand the attack, the flag is: FLAG{csrf_t0k3ns_4r3_1mp0rt4nt}'
+        '送金フォームにはCSRFトークン保護がありません',
+        '自動送信する隠しフォームを持つHTMLページを作成できます',
+        'method="POST" の <form> とJavaScriptを使って自動送信してみてください',
+        '攻撃を理解したら、フラグは: FLAG{csrf_t0k3ns_4r3_1mp0rt4nt}'
     ]
     order = 4
 

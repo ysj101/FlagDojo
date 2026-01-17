@@ -20,18 +20,18 @@ class XSSStoredChallenge(BaseChallenge):
     difficulty = 'medium'
     points = 200
     description = '''
-    A simple comment board where users can post messages.
-    All comments are stored in the database and displayed to everyone.
+    ユーザーがメッセージを投稿できるシンプルな掲示板です。
+    すべてのコメントはデータベースに保存され、全員に表示されます。
 
-    **Objective**: Inject JavaScript that will execute for everyone viewing the page.
-    The flag will appear once you successfully trigger an XSS payload.
+    **目的**: ページを閲覧するすべての人に対して実行されるJavaScriptを注入してください。
+    XSSペイロードの実行に成功すると、フラグが表示されます。
     '''
     flag = 'FLAG{st0r3d_xss_1s_p3rs1st3nt}'
     hints = [
-        'Try posting a comment with HTML tags like <script>alert(1)</script>',
-        'The comments are displayed without proper sanitization',
-        'Your payload will be stored in the database and executed for all viewers',
-        'Once you get an alert working, the flag is: FLAG{st0r3d_xss_1s_p3rs1st3nt}'
+        '<script>alert(1)</script> のようなHTMLタグを含むコメントを投稿してみてください',
+        'コメントは適切なサニタイズなしで表示されています',
+        'ペイロードはデータベースに保存され、すべての閲覧者に対して実行されます',
+        'アラートが動作したら、フラグは: FLAG{st0r3d_xss_1s_p3rs1st3nt}'
     ]
     order = 3
 

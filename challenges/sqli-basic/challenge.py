@@ -19,16 +19,16 @@ class SQLiBasicChallenge(BaseChallenge):
     difficulty = 'easy'
     points = 100
     description = '''
-    A simple login form that checks credentials against a database.
-    The admin password is unknown, but perhaps you can bypass the authentication?
-    
-    **Objective**: Login as the 'admin' user without knowing the password.
+    データベースに対して認証情報をチェックするシンプルなログインフォームです。
+    管理者のパスワードは不明ですが、認証をバイパスできるかもしれません？
+
+    **目的**: パスワードを知らずに 'admin' ユーザーとしてログインしてください。
     '''
     flag = 'FLAG{sql_1nj3ct10n_byp4ss}'
     hints = [
-        "Try entering: admin' --",
-        "The SQL query might look like: SELECT * FROM users WHERE username='...' AND password='...'",
-        "SQL comments can be used to ignore the rest of the query"
+        "次を入力してみてください: admin' --",
+        "SQLクエリは次のような形式かもしれません: SELECT * FROM users WHERE username='...' AND password='...'",
+        "SQLコメントを使用してクエリの残りを無視できます"
     ]
     order = 2
 
