@@ -44,8 +44,8 @@ XSS攻撃に成功して、JavaScriptコードを実行させてください。
             """
             search_term = request.args.get('q', '')
 
-            # Check if XSS attack was successful (contains script tag)
-            show_flag = '<script>' in search_term.lower() and '</script>' in search_term.lower()
+            # Check if XSS attack was successful (must contain alert(document.domain))
+            show_flag = 'alert(document.domain)' in search_term.lower()
 
             # INTENTIONAL VULNERABILITY: No escaping!
             # In a real application, you would use {{ search_term }} in template
