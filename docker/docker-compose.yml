@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: flagdojo
+    ports:
+      - "5000:5000"
+    volumes:
+      # Persist database
+      - flagdojo-data:/app/data
+      # Optional: Mount challenges for development
+      # - ../challenges:/app/challenges:ro
+    environment:
+      # Flask configuration
+      - FLASK_ENV=production
+      - FLASK_DEBUG=false
+
+      # Security settings (CHANGE THESE!)
+      - SECRET_KEY=${SECRET_KEY:-please-change-this-secret-key-in-production}
+      - ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-changeme}
+
+      # Session security
+      - SESSION_COOKIE_SECURE=false  # Set to true if using HTTPS
+      - SESSION_COOKIE_HTTPONLY=true
+      - SESSION_COOKIE_SAMESITE=Lax
+
+      # Database (SQLite is default)
+      - DATABASE_URL=sqlite:////app/data/flagdojo.db
+
+    restart: unless-stopped
+
+    networks:
+      - flagdojo-network
+
+    # Resource limits (optional but recommended)
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+volumes:
+  # Named volume for database persistence
+  flagdojo-data:
+    driver: local
+
+networks:
+  flagdojo-network:
+    driver: bridge

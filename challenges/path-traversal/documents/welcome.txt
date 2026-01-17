@@ -1,0 +1,7 @@
+Welcome to FileViewer Pro!
+
+This application allows you to view text files stored in our secure document storage.
+
+Select a file from the dropdown menu to view its contents.
+
+Thank you for using FileViewer Pro!

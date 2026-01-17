@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileViewer Pro - Document Viewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <!-- Header -->
+        <div class="mb-8">
+            <a href="/" class="text-blue-400 hover:text-blue-300 mb-4 inline-block">&larr; Back to Challenges</a>
+            <h1 class="text-4xl font-bold mb-2">📁 FileViewer Pro</h1>
+            <p class="text-gray-400">Secure Document Viewer v1.0</p>
+        </div>
+
+        <!-- File Selection -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-6 border border-gray-700">
+            <h2 class="text-2xl font-bold mb-4">Select a Document</h2>
+            <form method="GET" action="{{ url_for('challenge_path-traversal.index') }}" class="flex gap-4">
+                <select
+                    name="file"
+                    class="flex-1 px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                    <option value="">-- Select a file --</option>
+                    {% for file in available_files %}
+                        <option value="{{ file }}" {% if file == filename %}selected{% endif %}>
+                            {{ file }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <button
+                    type="submit"
+                    class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg font-medium transition"
+                >
+                    View File
+                </button>
+            </form>
+
+            <!-- Manual file path input (for testing) -->
+            <details class="mt-4">
+                <summary class="cursor-pointer text-gray-400 hover:text-gray-300 text-sm">Advanced: Enter file path manually</summary>
+                <form method="GET" action="{{ url_for('challenge_path-traversal.index') }}" class="mt-2 flex gap-4">
+                    <input
+                        type="text"
+                        name="file"
+                        placeholder="e.g., welcome.txt or ../../secret.txt"
+                        value="{{ filename }}"
+                        class="flex-1 px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                    >
+                    <button
+                        type="submit"
+                        class="bg-gray-600 hover:bg-gray-700 px-6 py-2 rounded-lg font-medium transition text-sm"
+                    >
+                        Load
+                    </button>
+                </form>
+            </details>
+        </div>
+
+        <!-- Error Message -->
+        {% if error %}
+            <div class="bg-red-500/20 border border-red-500 rounded-lg p-4 mb-6">
+                <p class="text-red-400">⚠️ {{ error }}</p>
+            </div>
+        {% endif %}
+
+        <!-- File Content -->
+        {% if file_content %}
+            <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold">📄 {{ filename }}</h2>
+                    <span class="text-sm text-gray-500">{{ file_content|length }} characters</span>
+                </div>
+                <pre class="bg-gray-900 p-4 rounded-lg overflow-x-auto text-sm font-mono border border-gray-700">{{ file_content }}</pre>
+            </div>
+        {% elif not error %}
+            <div class="bg-gray-800 rounded-lg p-12 text-center border border-gray-700">
+                <p class="text-gray-500 text-lg">Select a file to view its contents</p>
+            </div>
+        {% endif %}
+
+        <!-- File Info -->
+        <div class="mt-6 bg-gray-800/50 rounded-lg p-4 border border-gray-700">
+            <div class="text-sm text-gray-400">
+                <p><strong>Current directory:</strong> /app/documents/</p>
+                <p><strong>Available files:</strong> {{ available_files|length }}</p>
+                <p class="text-xs mt-2 text-gray-500">
+                    Note: This viewer is restricted to the documents directory for security.
+                </p>
+            </div>
+        </div>
+
+        <!-- Challenge Hint -->
+        <div class="mt-8 bg-yellow-500/10 border border-yellow-500/50 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-2 text-yellow-400">💡 Challenge Objective</h3>
+            <p class="text-gray-300 mb-4">
+                This file viewer claims to restrict access to the documents directory.
+                Can you use a path traversal attack to read files from outside this directory?
+            </p>
+            <p class="text-gray-300 mb-4">
+                <strong>Goal:</strong> Read the secret file located at <code class="bg-gray-800 px-2 py-1 rounded">/tmp/secret.txt</code>
+            </p>
+            <details>
+                <summary class="cursor-pointer text-blue-400 hover:text-blue-300">Click for hints</summary>
+                <ul class="mt-2 space-y-1 text-sm text-gray-400 list-disc list-inside">
+                    <li>Try using the manual file path input above</li>
+                    <li>Use <code class="bg-gray-800 px-1">../</code> to go up one directory level</li>
+                    <li>You may need multiple <code class="bg-gray-800 px-1">../</code> sequences to reach the root</li>
+                    <li>Example: <code class="bg-gray-800 px-1">../../../tmp/secret.txt</code></li>
+                    <li>The exact number of <code class="bg-gray-800 px-1">../</code> needed depends on the directory structure</li>
+                </ul>
+            </details>
+        </div>
+
+        <!-- Example Exploits -->
+        <div class="mt-6 bg-blue-500/10 border border-blue-500/50 rounded-lg p-6">
+            <h3 class="text-lg font-bold mb-2 text-blue-400">🔍 Learning Resources</h3>
+            <details>
+                <summary class="cursor-pointer text-gray-300 hover:text-gray-200">What is Path Traversal?</summary>
+                <div class="mt-2 text-sm text-gray-400 space-y-2">
+                    <p>
+                        Path traversal (also known as directory traversal) is a web security vulnerability
+                        that allows an attacker to read arbitrary files on the server.
+                    </p>
+                    <p>
+                        By manipulating file paths with sequences like <code class="bg-gray-800 px-1">../</code>,
+                        attackers can escape from the intended directory and access sensitive files.
+                    </p>
+                    <p class="font-semibold">Prevention:</p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>Validate and sanitize all file path inputs</li>
+                        <li>Use allowlists of permitted files</li>
+                        <li>Resolve the full path and check it's within the allowed directory</li>
+                        <li>Use built-in framework functions for safe file access</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+    </div>
+</body>
+</html>

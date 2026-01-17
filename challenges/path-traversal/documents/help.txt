@@ -1,0 +1,8 @@
+FileViewer Pro - Help Documentation
+
+How to use:
+1. Select a file from the dropdown menu
+2. Click "View File" to display contents
+3. Files are stored in the /documents directory
+
+For support, contact: support@securecorp.example
