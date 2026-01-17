@@ -107,7 +107,10 @@ class CSRFChallenge(BaseChallenge):
                 current_user=current_user,
                 account=account,
                 accounts=accounts,
-                transactions=transactions
+                transactions=transactions,
+                challenge_summary=self.summary,
+                challenge_description=self.description,
+                challenge_hints=self.hints
             )
 
         @self.blueprint.route('/transfer', methods=['POST'])

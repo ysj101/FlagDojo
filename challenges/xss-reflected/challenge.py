@@ -49,5 +49,8 @@ JavaScriptコードを注入して実行させることができますか？
 
             return render_template(
                 'search.html',
-                search_term=search_term
+                search_term=search_term,
+                challenge_summary=self.summary,
+                challenge_description=self.description,
+                challenge_hints=self.hints
             )

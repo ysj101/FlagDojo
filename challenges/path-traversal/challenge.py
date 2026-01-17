@@ -144,5 +144,8 @@ Remember: Always validate and sanitize file paths in your applications!
                 available_files=available_files,
                 filename=filename,
                 file_content=file_content,
-                error=error
+                error=error,
+                challenge_summary=self.summary,
+                challenge_description=self.description,
+                challenge_hints=self.hints
             )

@@ -52,7 +52,13 @@ class SQLiBasicChallenge(BaseChallenge):
         @self.blueprint.route('/')
         def index():
             """Login page."""
-            return render_template('login.html', message=session.pop('message', None))
+            return render_template(
+                'login.html',
+                message=session.pop('message', None),
+                challenge_summary=self.summary,
+                challenge_description=self.description,
+                challenge_hints=self.hints
+            )
 
         @self.blueprint.route('/login', methods=['POST'])
         def login():

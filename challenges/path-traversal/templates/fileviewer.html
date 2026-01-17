@@ -92,51 +92,28 @@
             </div>
         </div>
 
-        <!-- Challenge Hint -->
-        <div class="mt-8 bg-yellow-500/10 border border-yellow-500/50 rounded-lg p-6">
-            <h3 class="text-xl font-bold mb-2 text-yellow-400">💡 Challenge Objective</h3>
-            <p class="text-gray-300 mb-4">
-                This file viewer claims to restrict access to the documents directory.
-                Can you use a path traversal attack to read files from outside this directory?
-            </p>
-            <p class="text-gray-300 mb-4">
-                <strong>Goal:</strong> Read the secret file located at <code class="bg-gray-800 px-2 py-1 rounded">/tmp/secret.txt</code>
-            </p>
-            <details>
-                <summary class="cursor-pointer text-blue-400 hover:text-blue-300">Click for hints</summary>
-                <ul class="mt-2 space-y-1 text-sm text-gray-400 list-disc list-inside">
-                    <li>Try using the manual file path input above</li>
-                    <li>Use <code class="bg-gray-800 px-1">../</code> to go up one directory level</li>
-                    <li>You may need multiple <code class="bg-gray-800 px-1">../</code> sequences to reach the root</li>
-                    <li>Example: <code class="bg-gray-800 px-1">../../../tmp/secret.txt</code></li>
-                    <li>The exact number of <code class="bg-gray-800 px-1">../</code> needed depends on the directory structure</li>
-                </ul>
-            </details>
+        <!-- Challenge Information -->
+        <div class="mt-8 bg-blue-500/10 border border-blue-500/50 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-2 text-blue-400">📋 チャレンジ概要</h3>
+            <p class="text-gray-300">{{ challenge_summary }}</p>
         </div>
 
-        <!-- Example Exploits -->
-        <div class="mt-6 bg-blue-500/10 border border-blue-500/50 rounded-lg p-6">
-            <h3 class="text-lg font-bold mb-2 text-blue-400">🔍 Learning Resources</h3>
-            <details>
-                <summary class="cursor-pointer text-gray-300 hover:text-gray-200">What is Path Traversal?</summary>
-                <div class="mt-2 text-sm text-gray-400 space-y-2">
-                    <p>
-                        Path traversal (also known as directory traversal) is a web security vulnerability
-                        that allows an attacker to read arbitrary files on the server.
-                    </p>
-                    <p>
-                        By manipulating file paths with sequences like <code class="bg-gray-800 px-1">../</code>,
-                        attackers can escape from the intended directory and access sensitive files.
-                    </p>
-                    <p class="font-semibold">Prevention:</p>
-                    <ul class="list-disc list-inside ml-4">
-                        <li>Validate and sanitize all file path inputs</li>
-                        <li>Use allowlists of permitted files</li>
-                        <li>Resolve the full path and check it's within the allowed directory</li>
-                        <li>Use built-in framework functions for safe file access</li>
-                    </ul>
-                </div>
+        <div class="mt-4 bg-green-500/10 border border-green-500/50 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-2 text-green-400">🎯 実施するタスク</h3>
+            <div class="text-gray-300 whitespace-pre-line">{{ challenge_description }}</div>
+        </div>
+
+        <!-- Hints Section -->
+        <div class="mt-4 bg-yellow-500/10 border border-yellow-500/50 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-3 text-yellow-400">💡 ヒント（困った時に開く）</h3>
+            {% for hint in challenge_hints %}
+            <details class="mb-2">
+                <summary class="cursor-pointer text-yellow-400 hover:text-yellow-300 font-medium">
+                    ヒント {{ loop.index }}
+                </summary>
+                <p class="mt-2 text-gray-300 pl-4">{{ hint }}</p>
             </details>
+            {% endfor %}
         </div>
     </div>
 </body>

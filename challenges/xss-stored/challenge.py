@@ -70,7 +70,10 @@ XSSペイロードの実行に成功すると、フラグが表示されます�
 
             return render_template(
                 'comments.html',
-                comments=comments
+                comments=comments,
+                challenge_summary=self.summary,
+                challenge_description=self.description,
+                challenge_hints=self.hints
             )
 
         @self.blueprint.route('/post', methods=['POST'])
