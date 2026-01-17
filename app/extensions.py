@@ -10,6 +10,6 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 
 # Configure login manager
-login_manager.login_view = 'core.login'
+login_manager.login_view = 'auth.login'
 login_manager.login_message = 'Please log in to access this page.'
 login_manager.login_message_category = 'info'
