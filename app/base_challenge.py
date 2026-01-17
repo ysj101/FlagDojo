@@ -22,6 +22,7 @@ class BaseChallenge:
     category = None  # Category (e.g., 'XSS', 'SQLi', 'CSRF')
     difficulty = None  # 'easy', 'medium', or 'hard'
     points = 0  # Points awarded for solving
+    summary = None  # Short summary for challenge list (1-2 sentences)
     description = None  # Challenge description (can be markdown)
     flag = None  # Correct flag (plaintext)
     hints = []  # List of hints (optional)
@@ -112,6 +113,7 @@ class BaseChallenge:
             'category': self.category,
             'difficulty': self.difficulty or 'medium',
             'points': self.points or 100,
+            'summary': self.summary,
             'description': self.description or 'No description provided.',
             'flag': self.flag,
             'hints': self.hints,

@@ -18,11 +18,12 @@ class SQLiBasicChallenge(BaseChallenge):
     category = 'SQL Injection'
     difficulty = 'easy'
     points = 100
-    description = '''
-    データベースに対して認証情報をチェックするシンプルなログインフォームです。
-    管理者のパスワードは不明ですが、認証をバイパスできるかもしれません？
+    summary = 'SQLインジェクションを使用してパスワードなしでログイン認証をバイパスします。'
+    description = '''データベースに対して認証情報をチェックするシンプルなログインフォームです。
+管理者のパスワードは不明ですが、認証をバイパスできるかもしれません？
 
-    **目的**: パスワードを知らずに 'admin' ユーザーとしてログインしてください。
+**目的**:
+パスワードを知らずに 'admin' ユーザーとしてログインしてください。
     '''
     flag = 'FLAG{sql_1nj3ct10n_byp4ss}'
     hints = [

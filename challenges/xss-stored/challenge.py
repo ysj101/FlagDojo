@@ -19,12 +19,13 @@ class XSSStoredChallenge(BaseChallenge):
     category = 'XSS'
     difficulty = 'medium'
     points = 200
-    description = '''
-    ユーザーがメッセージを投稿できるシンプルな掲示板です。
-    すべてのコメントはデータベースに保存され、全員に表示されます。
+    summary = 'コメント掲示板でデータベースに保存される永続的なXSS攻撃を学びます。'
+    description = '''ユーザーがメッセージを投稿できるシンプルな掲示板です。
+すべてのコメントはデータベースに保存され、全員に表示されます。
 
-    **目的**: ページを閲覧するすべての人に対して実行されるJavaScriptを注入してください。
-    XSSペイロードの実行に成功すると、フラグが表示されます。
+**目的**:
+ページを閲覧するすべての人に対して実行されるJavaScriptを注入してください。
+XSSペイロードの実行に成功すると、フラグが表示されます。
     '''
     flag = 'FLAG{st0r3d_xss_1s_p3rs1st3nt}'
     hints = [

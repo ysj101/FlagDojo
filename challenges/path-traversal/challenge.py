@@ -19,12 +19,13 @@ class PathTraversalChallenge(BaseChallenge):
     category = 'Path Traversal'
     difficulty = 'easy'
     points = 100
-    description = '''
-    documentsディレクトリからテキストファイルを表示するシンプルなファイルビューアーアプリケーションです。
-    ドロップダウンメニューからファイルを選択して内容を表示できます。
+    summary = 'ディレクトリトラバーサルを使用してアクセス制限外のファイルを読み取ります。'
+    description = '''documentsディレクトリからテキストファイルを表示するシンプルなファイルビューアーアプリケーションです。
+ドロップダウンメニューからファイルを選択して内容を表示できます。
 
-    **目的**: パストラバーサルを使用して、documentsディレクトリ外の秘密ファイルを読み取ってください。
-    フラグが含まれている `/tmp/secret.txt` を見つけて読み取ってください。
+**目的**:
+パストラバーサルを使用して、documentsディレクトリ外の秘密ファイルを読み取ってください。
+フラグが含まれている `/tmp/secret.txt` を見つけて読み取ってください。
     '''
     flag = 'FLAG{p4th_tr4v3rs4l_1s_d4ng3r0us}'
     hints = [

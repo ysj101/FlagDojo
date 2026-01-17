@@ -17,11 +17,12 @@ class XSSReflectedChallenge(BaseChallenge):
     category = 'XSS'
     difficulty = 'easy'
     points = 100
-    description = '''
-    この検索機能は、検索クエリを結果に直接表示します。
-    JavaScriptコードを注入して実行させることができますか？
+    summary = '検索機能にJavaScriptコードを注入して実行させる反射型XSSの脆弱性を学びます。'
+    description = '''この検索機能は、検索クエリを結果に直接表示します。
+JavaScriptコードを注入して実行させることができますか？
 
-    **目的**: `alert(document.domain)` でアラートボックスを表示させてください。
+**目的**:
+`alert(document.domain)` でアラートボックスを表示させてください。
     '''
     flag = 'FLAG{r3fl3ct3d_xss_1s_d4ng3r0us}'
     hints = [

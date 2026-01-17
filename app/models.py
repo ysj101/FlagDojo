@@ -64,6 +64,7 @@ class Challenge(db.Model):
     category = db.Column(db.String(50), nullable=False, index=True)
     difficulty = db.Column(db.String(20), nullable=False)  # easy, medium, hard
     points = db.Column(db.Integer, nullable=False, default=100)
+    summary = db.Column(db.Text)  # Short summary for challenge list
     description = db.Column(db.Text, nullable=False)
     flag = db.Column(db.String(255), nullable=False)  # Store plaintext flag
     hints = db.Column(db.Text)  # JSON string for hints

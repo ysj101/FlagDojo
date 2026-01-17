@@ -170,6 +170,7 @@ def sync_challenges_to_db(challenges):
             challenge.category = metadata['category']
             challenge.difficulty = metadata['difficulty']
             challenge.points = metadata['points']
+            challenge.summary = metadata['summary']
             challenge.description = metadata['description']
             challenge.flag = metadata['flag']
             challenge.hints = json.dumps(metadata['hints']) if metadata['hints'] else None
@@ -183,6 +184,7 @@ def sync_challenges_to_db(challenges):
                 category=metadata['category'],
                 difficulty=metadata['difficulty'],
                 points=metadata['points'],
+                summary=metadata['summary'],
                 description=metadata['description'],
                 flag=metadata['flag'],
                 hints=json.dumps(metadata['hints']) if metadata['hints'] else None,
