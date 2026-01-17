@@ -22,13 +22,14 @@ class XSSReflectedChallenge(BaseChallenge):
 JavaScriptコードを注入して実行させることができますか？
 
 **目的**:
-`alert(document.domain)` でアラートボックスを表示させてください。
+XSS攻撃に成功して、JavaScriptコードを実行させてください。
+成功するとフラグが表示されます。
     '''
     flag = 'FLAG{r3fl3ct3d_xss_1s_d4ng3r0us}'
     hints = [
         '次を検索してみてください: <script>alert(1)</script>',
         '検索語がサニタイズされずにHTMLに直接反映されています',
-        'アラートが動作したら、チャレンジ説明に表示されているフラグを提出してください'
+        'ページのソースコードを見て、どこに脆弱性があるか確認してください'
     ]
     order = 1
 
@@ -43,6 +44,9 @@ JavaScriptコードを注入して実行させることができますか？
             """
             search_term = request.args.get('q', '')
 
+            # Check if XSS attack was successful (contains script tag)
+            show_flag = '<script>' in search_term.lower() and '</script>' in search_term.lower()
+
             # INTENTIONAL VULNERABILITY: No escaping!
             # In a real application, you would use {{ search_term }} in template
             # which automatically escapes. Here we use |safe to disable escaping.
@@ -50,6 +54,8 @@ JavaScriptコードを注入して実行させることができますか？
             return render_template(
                 'search.html',
                 search_term=search_term,
+                show_flag=show_flag,
+                flag=self.flag if show_flag else None,
                 challenge_summary=self.summary,
                 challenge_description=self.description,
                 challenge_hints=self.hints
