@@ -27,9 +27,9 @@ XSS攻撃に成功して、JavaScriptコードを実行させてください。
     '''
     flag = 'FLAG{r3fl3ct3d_xss_1s_d4ng3r0us}'
     hints = [
-        '次を検索してみてください: <script>alert(1)</script>',
-        '検索語がサニタイズされずにHTMLに直接反映されています',
-        'ページのソースコードを見て、どこに脆弱性があるか確認してください'
+        '検索語がページに直接表示されています。ブラウザの開発者ツール（F12）で「Search results for:」の部分のHTMLを確認してみてください',
+        '検索語がサニタイズされずにHTMLとして解釈されています。HTMLタグやJavaScriptコードを含む文字列を検索してみてください',
+        '例えば、<script>タグを使ってJavaScriptを実行できます。alert関数などを使ってみましょう'
     ]
     order = 1
 
@@ -44,8 +44,15 @@ XSS攻撃に成功して、JavaScriptコードを実行させてください。
             """
             search_term = request.args.get('q', '')
 
-            # Check if XSS attack was successful (must contain alert(document.domain))
-            show_flag = 'alert(document.domain)' in search_term.lower()
+            # Check if XSS attack was successful (detect common XSS payloads)
+            search_lower = search_term.lower()
+            show_flag = (
+                ('<script>' in search_lower and '</script>' in search_lower) or  # <script>alert(1)</script>
+                ('onerror=' in search_lower) or  # <img src=x onerror=alert(1)>
+                ('onload=' in search_lower) or   # <body onload=alert(1)>
+                ('onclick=' in search_lower) or  # <div onclick=alert(1)>
+                ('javascript:' in search_lower)  # <a href="javascript:alert(1)">
+            )
 
             # INTENTIONAL VULNERABILITY: No escaping!
             # In a real application, you would use {{ search_term }} in template
